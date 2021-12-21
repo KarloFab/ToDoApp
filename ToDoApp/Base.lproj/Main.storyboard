@@ -30,7 +30,13 @@
                             <outlet property="delegate" destination="0JD-pD-p0b" id="JiX-pA-W9T"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDo" id="8q2-ia-ZjF"/>
+                    <navigationItem key="navigationItem" title="ToDo" id="8q2-ia-ZjF">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="KLM-nd-Da3">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="0JD-pD-p0b" id="5TY-hD-cOz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIW-2G-2QM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,6 +66,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

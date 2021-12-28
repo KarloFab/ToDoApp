@@ -43,6 +43,8 @@ class ToDoListViewController: UITableViewController {
         
         items[indexPath.row].done.toggle()
         
+        saveItems()
+        
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -59,15 +61,7 @@ class ToDoListViewController: UITableViewController {
             
             self.items.append(newItem)
             
-            let encoder = PropertyListEncoder()
-            
-            do{
-                let data = try encoder.encode(self.items)
-                try data.write(to: self.dataFilePath!)
-            } catch {
-                print("Error writing to file")
-            }
-
+            self.saveItems()
             
             self.tableView.reloadData()
         }
@@ -80,6 +74,18 @@ class ToDoListViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert,animated: true, completion: nil)
+    }
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do{
+            let data = try encoder.encode(items)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error writing to file")
+        }
+
     }
 }
 

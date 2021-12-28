@@ -11,8 +11,8 @@ class ToDoListViewController: UITableViewController {
     
     var items = [Item]()
     
-    let toDoListArrayKey = "ToDoListArray"
-    let userDefaults = UserDefaults.standard
+    var dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        .first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +21,6 @@ class ToDoListViewController: UITableViewController {
         newItem.title = "Do it"
         
         items.append(newItem)
-        
-        if let itemArray = userDefaults.array(forKey: toDoListArrayKey) as? [Item] {
-            items = itemArray
-        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +59,15 @@ class ToDoListViewController: UITableViewController {
             
             self.items.append(newItem)
             
-            self.userDefaults.set(self.items,forKey: self.toDoListArrayKey)
+            let encoder = PropertyListEncoder()
+            
+            do{
+                let data = try encoder.encode(self.items)
+                try data.write(to: self.dataFilePath!)
+            } catch {
+                print("Error writing to file")
+            }
+
             
             self.tableView.reloadData()
         }

@@ -17,10 +17,7 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item()
-        newItem.title = "Do it"
-        
-        items.append(newItem)
+        loadItems()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,6 +83,18 @@ class ToDoListViewController: UITableViewController {
             print("Error writing to file")
         }
 
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                items = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error occured while decoding plist")
+            }
+        }
     }
 }
 

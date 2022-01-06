@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var items = [Item]()
     
     var dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -53,14 +55,12 @@ class ToDoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add new to do item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
+            newItem.done = false
             
             self.items.append(newItem)
-            
             self.saveItems()
-            
-            self.tableView.reloadData()
         }
         
         alert.addTextField { alertTextField in
@@ -74,27 +74,25 @@ class ToDoListViewController: UITableViewController {
     }
     
     func saveItems() {
-        let encoder = PropertyListEncoder()
-        
         do{
-            let data = try encoder.encode(items)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("Error writing to file")
+            print("Error saving to context:\(context)")
         }
-
+        
+        self.tableView.reloadData()
     }
     
     func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            
-            do {
-                items = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Error occured while decoding plist")
-            }
-        }
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//
+//            do {
+//                items = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error occured while decoding plist")
+//            }
+//        }
     }
 }
 

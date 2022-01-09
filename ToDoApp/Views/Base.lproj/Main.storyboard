@@ -7,6 +7,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Category View Controller-->
+        <scene sceneID="XKP-Sg-41D">
+            <objects>
+                <tableViewController id="g7b-vW-MNX" customClass="CategoryViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="UP0-yc-HE4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vWg-eP-6br">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vWg-eP-6br" id="I8j-2X-EmW">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="g7b-vW-MNX" id="BgT-Hf-tew"/>
+                            <outlet property="delegate" destination="g7b-vW-MNX" id="aNs-Uz-GEL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="fN8-bg-EIu"/>
+                    <connections>
+                        <segue destination="0JD-pD-p0b" kind="show" identifier="goToItems" id="w2d-UB-cGK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TB3-nJ-BBS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1412" y="106"/>
+        </scene>
         <!--ToDo-->
         <scene sceneID="7oz-Kr-DSx">
             <objects>
@@ -48,7 +80,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIW-2G-2QM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1308.6956521739132" y="106.47321428571428"/>
+            <point key="canvasLocation" x="2436" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wKC-Ch-2Y9">
@@ -65,7 +97,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="0JD-pD-p0b" kind="relationship" relationship="rootViewController" id="BRp-Ce-Sba"/>
+                        <segue destination="g7b-vW-MNX" kind="relationship" relationship="rootViewController" id="NL3-XV-lGv"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pki-yF-TCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

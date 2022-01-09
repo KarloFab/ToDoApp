@@ -84,7 +84,7 @@ class ToDoListViewController: UITableViewController {
         do {
             items = try context.fetch(request)
         } catch {
-            print ("Error fetching data from context: \(error)")
+            print ("Error fetching data from context: \(context)")
         }
         
         tableView.reloadData()

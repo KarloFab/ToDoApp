@@ -37,6 +37,16 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data Manipulation methods
     
+    func saveCategories(){
+        do {
+            try context.save()
+        } catch {
+            print("Error saving category: \(error)")
+        }
+    
+        tableView.reloadData()
+    }
+    
     //MARK: - Add new categories
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -47,6 +57,9 @@ class CategoryViewController: UITableViewController {
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             let newCategory = Category(context:self.context)
             newCategory.name = textField.text!
+            
+            self.categories.append(newCategory)
+            self.saveCategories()
         }
         
         alert.addAction(action)

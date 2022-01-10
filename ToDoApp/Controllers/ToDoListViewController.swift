@@ -13,9 +13,6 @@ class ToDoListViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var items = [Item]()
     
-    var dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        .first?.appendingPathComponent("Items.plist")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

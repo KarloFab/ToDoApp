@@ -47,6 +47,18 @@ class CategoryViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func loadCategories(){
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        do {
+            categories = try context.fetch(request)
+        } catch {
+            print("Error retrieving data: \(error)")
+        }
+    
+        tableView.reloadData()
+    }
+    
     //MARK: - Add new categories
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {

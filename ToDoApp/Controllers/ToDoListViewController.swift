@@ -58,6 +58,7 @@ class ToDoListViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.category = self.selectedCategory
             
             self.items.append(newItem)
             self.saveItems()
@@ -84,6 +85,10 @@ class ToDoListViewController: UITableViewController {
     }
     
     func loadItems(for request: NSFetchRequest<Item> = Item.fetchRequest()) {
+        let predicate = NSPredicate(format: "category.name MATCHES %@", selectedCategory!.name!)
+        
+        request.predicate = predicate
+        
         do {
             items = try context.fetch(request)
         } catch {

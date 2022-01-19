@@ -54,6 +54,19 @@ class CategoryViewController: SwipeTableViewController {
         tableView.reloadData()
     }
     
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let categoryToBeDeleted = self.categories?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(categoryToBeDeleted)
+                }
+            } catch {
+                print("Error deleting category, \(error)")
+            }
+        }
+    }
+    
     //MARK: - Table Delegates methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
